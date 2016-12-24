@@ -35,6 +35,7 @@ def chk_pause():
     sys.exit(0)
     
 def run_record():
+    print("Started recording meeting...")
     global cur_pause
     frames = []
     while True:
