@@ -35,7 +35,7 @@ def chk_pause():
     sys.exit(0)
     
 def run_record():
-    print("Started recording meeting...")
+    print("Started meeting recording - press enter to save soundbite...")
     global cur_pause
     frames = []
     while True:
@@ -55,6 +55,8 @@ def run_record():
 
 def save(frames_in):
     print("SAVED")
+    if not os.path.isdir(output_dir):
+        os.makedirs(output_dir)
     file_pth = output_dir + str(int(time.time()*1000))+'.wav'
     wf = wave.open(file_pth, 'wb')
     wf.setnchannels(CHANNELS)
@@ -73,7 +75,8 @@ def main(argv):
         t.start()
         run_record()
     except KeyboardInterrupt:
-        print("Press enter to kill...")
+        print("Press enter to fully kill...")
+        print("Yep, press it - threading sucks :'(")
         do_end = True
         stream.stop_stream()
         stream.close()
